@@ -108,21 +108,6 @@
         }
     </style>
 </head>
-<script>
-  function filterProjects(skill) {
-      const projects = document.querySelectorAll('.project-card');
-  
-      projects.forEach(project => {
-          const skills = project.dataset.skills;
-  
-          if (skill === 'all' || (skills && skills.includes(skill))) {
-              project.style.display = 'block';
-          } else {
-              project.style.display = 'none';
-          }
-      });
-  }
-  </script>
 <body>
 
 <header>
@@ -211,7 +196,7 @@
         <video width="250" controls>
           <source src="media/mpc_biped_stairs.mp4" type="video/mp4">
       </video>
-      <div class="skills"></div>
+      <div class="skills">
         <span class="skill">MPC</span>
         <span class="skill">Dynamics & Control</span>
         <span class="skill">MATLAB / Simulink</span>
@@ -266,7 +251,7 @@
         <!-- <video controls>
             <source src="media/uav_landing_demo.mp4" type="video/mp4">
         </video> -->
-        <div class="skills"></div>
+        <div class="skills">
           <span class="skill">Autonomy</span>
           <span class="skill">UAVs</span>
           <span class="skill">Advanced Control Theory</span>
@@ -276,7 +261,7 @@
       </div>
     </div>
 
-    <div class="project-card" data-skills="autonomy uav code hard"></div>>
+    <div class="project-card" data-skills="autonomy uav code hard">
         <h3>Precision UAV Landing Using Adaptable Constraints</h3>
         <p><strong>Institution:</strong> Lawrence Livermore National Lab</p>
         <p><strong>Role:</strong> Contributor</p>
@@ -288,7 +273,7 @@
         <video controls>
             <source src="media/llnl_demo.mp4" type="video/mp4">
         </video> -->
-        <div class="skills"></div>
+        <div class="skills">
           <span class="skill">Autonomy</span>
           <span class="skill">Computer Vision</span>
           <span class="skill">UAVs</span>
@@ -303,6 +288,20 @@
 <footer>
     &copy; 2025 Helena Teixeira-Dasilva | <a href="mailto:hcteixei@usc.edu">hcteixei@usc.edu</a>
 </footer>
-
+<script>
+  function filterProjects(skill) {
+      const projects = document.querySelectorAll('.project-card');
+  
+      projects.forEach(project => {
+          const skills = project.dataset.skills;
+  
+          if (skill === 'all' || (skills && skills.includes(skill))) {
+              project.style.display = 'block';
+          } else {
+              project.style.display = 'none';
+          }
+      });
+  }
+  </script>
 </body>
 </html>
