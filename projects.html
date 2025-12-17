@@ -72,8 +72,57 @@
             padding: 2rem;
             color: #666;
         }
+        .filter-bar {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .filter-bar button {
+            margin: 0.3rem;
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 5px;
+            background: #0077cc;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-bar button:hover {
+            background: #005fa3;
+        }
+
+        .skills {
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .skill {
+            display: inline-block;
+            background: #e6f2ff;
+            color: #005fa3;
+            padding: 0.25rem 0.6rem;
+            margin: 0.2rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
     </style>
 </head>
+<script>
+  function filterProjects(skill) {
+      const projects = document.querySelectorAll('.project-card');
+  
+      projects.forEach(project => {
+          const skills = project.dataset.skills;
+  
+          if (skill === 'all' || (skills && skills.includes(skill))) {
+              project.style.display = 'block';
+          } else {
+              project.style.display = 'none';
+          }
+      });
+  }
+  </script>
 <body>
 
 <header>
@@ -89,11 +138,23 @@
 </nav>
 
 <div class="container">
+  <div class="filter-bar">
+    <button onclick="filterProjects('all')">All</button>
+    <button onclick="filterProjects('autonomy')">Autonomy</button>
+    <button onclick="filterProjects('dnc')">Dynamics and Control</button>
+    <button onclick="filterProjects('mpc')">Model Predictive Control (MPC)</button>
+    <button onclick="filterProjects('ai_ml')">AI/Machine Learning</button>
+    <button onclick="filterProjects('uav')">UAVs</button>
+    <button onclick="filterProjects('code')">Code (Python, C++, MATLAB, ROS2, React.js)</button>
+    <button onclick="filterProjects('sim')">Simulation</button>
+    <button onclick="filterProjects('hard')">Hardware Demo</button>
+    <button onclick="filterProjects('planning')">Motion Planning</button>
+  </div>
 
     <!-- Class Projects -->
-    <div class="project-card">
-        <h3>Distributed and Decentralized MPC for Multi-Agent Rendezvous</h3>
-        <p><strong>Course:</strong> Robotic Autonomy in Extreme Environments (Group Project)</p>
+    <div class="project-card" data-skills="autonomy mpc dnc code sim planning">
+      <h3>Distributed and Decentralized MPC for Multi-Agent Rendezvous</h3>
+      <p><strong>Course:</strong> Robotic Autonomy in Extreme Environments (Group Project)</p>
         <p><strong>Role:</strong> Distributed MPC developer</p>
         <ul>
             <li>Implemented an object-oriented distributed MPC controller in python simulation.</li>
@@ -101,35 +162,48 @@
         </ul>
         <a href="Distributed_MPC_for_co_ordinated_RPO_between_multiple_spacecrafts.pdf">Report</a>
         <a href="https://github.com/TeixeiraDasilva-Helena/distributed-and-decentralized-mpc" target="_blank">GitHub Repo</a>
-        <img src="media/distributed_mpc_sim_case3.gif"
+        <img width="250" src="media/distributed_mpc_sim_case3.gif"
          alt="Rendezvous and obstacle-avoidance between 2 agents"
          class="project-gif">
-         <img src="media/distributed_mpc_sim_20agent.gif"
+         <img width="250" src="media/distributed_mpc_sim_20agent.gif"
          alt="Rendezvous between 20 agents"
          class="project-gif">
+      <div class="skills">
+          <span class="skill">Autonomy</span>
+          <span class="skill">MPC</span>
+          <span class="skill">Dynamics & Control</span>
+          <span class="skill">Python</span>
+          <span class="skill">Motion Planning</span>
+      </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-skills="ai_ml autonomy sim code">
         <h3>Deep-Q Reinforcement Learning Car Control</h3>
         <p><strong>Course:</strong> Mathematical Methods in Deep Learning (Solo Project)</p>
-        <p><strong>Role:</strong> Solo developer</p>
+        <p><strong>Role:</strong> Sole developer</p>
         <ul>
             <li>Trained Deep-Q agent to control a car in a simulated environment.</li>
             <li>Tested agent performance with various reward functions and obstacles.</li>
         </ul>
-        <!-- <a href="https://github.com/yourusername/dqn-car-control" target="_blank">GitHub Repo</a>
+        <a href="https://github.com/TeixeiraDasilva-Helena/deepQ-learned-car-control" target="_blank">GitHub Repo</a>
         <video controls>
             <source src="media/dqn_car_demo.mp4" type="video/mp4">
-        </video> -->
+        </video>
+        <div class="skills">
+          <span class="skill">AI / ML</span>
+          <span class="skill">Python</span>
+          <span class="skill">Autonomy</span>
+
+      </div>
     </div>
 
-    <div class="project-card" id="biped-mpc">
+    <div class="project-card" id="biped-mpc" data-skills="mpc dnc code sim">
         <h3>MPC Control of Bipedal Robot</h3>
         <p><strong>Course:</strong> Robotic Dynamics and Control (Group Project)</p>
-        <p><strong>Role:</strong> Implemented MPC controller in Simulink</p>
+        <p><strong>Role:</strong> Project Lead</p>
         <ul>
             <li>Developed MPC controller for bipedal walking and stability.</li>
-            <li>Tested controller in simulation to verify gait stability.</li>
+            <li>Tested controller in Simulink to verify gait stability.</li>
         </ul>
         <video width="250" controls >
             <source src="media/mpc_biped_stand.mp4" type="video/mp4">
@@ -137,10 +211,15 @@
         <video width="250" controls>
           <source src="media/mpc_biped_stairs.mp4" type="video/mp4">
       </video>
+      <div class="skills"></div>
+        <span class="skill">MPC</span>
+        <span class="skill">Dynamics & Control</span>
+        <span class="skill">MATLAB / Simulink</span>
+      </div>
     </div>
 
     <!-- Master's Research -->
-    <div class="project-card">
+    <div class="project-card" data-skills="dnc code hard">
         <h3>ZMP Sensing Gait for Quadruped</h3>
         <p><strong>Role:</strong> Lead Developer</p>
         <ul>
@@ -150,9 +229,15 @@
         <video width="250" controls>
             <source src="media/ZMP_demo.mp4" type="video/mp4">
         </video>
+        <div class="skills">
+          <span class="skill">C++</span>
+          <span class="skill">Python</span>
+          <span class="skill">ROS2</span>
+          <span class="skill">Dynamics & Control</span>
+      </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-skills="autonomy planning ai_ml code">
         <h3>Human-Robot Teaming Web Platform</h3>
         <p><strong>Role:</strong> Lead Developer</p>
         <ul>
@@ -160,10 +245,17 @@
             <li>Supports adaptive field data collection for quadruped robots.</li>
         </ul>
         <p><em>Video demo / screenshots pending permission. Paper forthcoming Spring 2026.</em></p>
+        <div class="skills">
+          <span class="skill">Autonomy</span>
+          <span class="skill">Motion Planning</span>
+          <span class="skill">AI / ML</span>
+          <span class="skill">Python</span>
+          <span class="skill">React.js</span>
+      </div>
     </div>
 
     <!-- Lab / Professional Research -->
-    <div class="project-card">
+    <div class="project-card" data-skills="autonomy uav dnc code hard">
         <h3>UAV CBF + CLF Autonomous Landing</h3>
         <p><strong>Institution:</strong> MIT Lincoln Lab</p>
         <p><strong>Role:</strong> Second author, hardware demo</p>
@@ -174,19 +266,36 @@
         <!-- <video controls>
             <source src="media/uav_landing_demo.mp4" type="video/mp4">
         </video> -->
+        <div class="skills"></div>
+          <span class="skill">Autonomy</span>
+          <span class="skill">UAVs</span>
+          <span class="skill">Advanced Control Theory</span>
+          <span class="skill">Python</span>
+          <span class="skill">ROS2</span>
+          <span class="skill">Pixhawk</span>
+      </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-skills="autonomy uav code hard"></div>>
         <h3>Precision UAV Landing Using Adaptable Constraints</h3>
         <p><strong>Institution:</strong> Lawrence Livermore National Lab</p>
         <p><strong>Role:</strong> Contributor</p>
         <ul>
-            <li>Designed and flight-tested UAV autonomy for precision landing.</li>
+            <li>Designed and flight-tested constraint and vision-enabled UAV autonomy for precision landing.</li>
+            <li>Completed successful outdoor test flights with centimeter precision.</li>
         </ul>
         <!-- <a href="media/LLNL_poster.pdf" target="_blank">Research Poster</a>
         <video controls>
             <source src="media/llnl_demo.mp4" type="video/mp4">
         </video> -->
+        <div class="skills"></div>
+          <span class="skill">Autonomy</span>
+          <span class="skill">Computer Vision</span>
+          <span class="skill">UAVs</span>
+          <span class="skill">Python</span>
+          <span class="skill">ROS2</span>
+          <span class="skill">ArduPilot</span>
+      </div>
     </div>
 
 </div>
